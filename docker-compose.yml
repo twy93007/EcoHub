@@ -1,28 +1,111 @@
-version: '3'
+version: '3.8'
 
 services:
   # 后端API服务
   backend:
-    build: ./backend
+    build:
+      context: ./src/backend
+      dockerfile: Dockerfile
+    volumes:
+      - ./src/backend:/app
     ports:
       - "5000:5000"
-    volumes:
-      - ./backend:/app
     environment:
-      - FLASK_APP=app.py
+      - FLASK_APP=gateway/app.py
       - FLASK_ENV=development
-      - JWT_SECRET_KEY=your_secure_jwt_key
+      - SECRET_KEY=dev_secret_key
+      - DATABASE_URL=postgresql://postgres:postgres@db:5432/ecohub
+      - MONGO_URI=mongodb://mongo:27017/ecohub
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - db
+      - mongo
+      - redis
+    networks:
+      - ecohub-network
 
-  # Nginx 反向代理
-  nginx:
-    image: nginx:latest
-    ports:
-      - "80:80"
+  # 前端服务
+  frontend:
+    build:
+      context: ./src/frontend
+      dockerfile: Dockerfile
     volumes:
-      - ./nginx/conf.d:/etc/nginx/conf.d
-      - ./frontend:/usr/share/nginx/html
+      - ./src/frontend:/app
+      - /app/node_modules
+    ports:
+      - "3000:80"
     depends_on:
       - backend
+    networks:
+      - ecohub-network
+
+  # PostgreSQL 数据库
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=ecohub
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - ecohub-network
+
+  # MongoDB 数据库
+  mongo:
+    image: mongo:5
+    environment:
+      - MONGO_INITDB_DATABASE=ecohub
+    volumes:
+      - mongo-data:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - ecohub-network
+
+  # Redis 缓存
+  redis:
+    image: redis:6
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - ecohub-network
+
+  # pgAdmin - PostgreSQL管理工具
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@ecohub.com
+      - PGADMIN_DEFAULT_PASSWORD=admin
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    networks:
+      - ecohub-network
+
+  # Mongo Express - MongoDB管理工具
+  mongo-express:
+    image: mongo-express
+    environment:
+      - ME_CONFIG_MONGODB_SERVER=mongo
+      - ME_CONFIG_MONGODB_PORT=27017
+    ports:
+      - "8081:8081"
+    depends_on:
+      - mongo
+    networks:
+      - ecohub-network
 
 volumes:
-  data:
+  postgres-data:
+  mongo-data:
+  redis-data:
+
+networks:
+  ecohub-network:
+    driver: bridge

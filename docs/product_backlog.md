@@ -7,15 +7,15 @@
   - [x] 设置分支保护规则
   - [x] 创建README和贡献指南
 
-- [ ] **搭建本地开发环境**
-  - 配置Python虚拟环境
-  - 安装开发依赖
-  - 设置代码格式化工具
+- [x] **搭建本地开发环境**
+  - [x] 配置Python虚拟环境
+  - [x] 安装开发依赖
+  - [x] 设置代码格式化工具
 
-- [ ] **配置Docker开发环境**
-  - 创建基础Dockerfile
-  - 编写docker-compose.yml
-  - 设置容器间网络通信
+- [x] **配置Docker开发环境**
+  - [x] 创建基础Dockerfile
+  - [x] 编写docker-compose.yml
+  - [x] 设置容器间网络通信
 
 - [ ] **设置CI/CD流水线**
   - 配置GitHub Actions工作流
