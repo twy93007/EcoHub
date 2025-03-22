@@ -17,10 +17,10 @@
   - [x] 编写docker-compose.yml
   - [x] 设置容器间网络通信
 
-- [ ] **设置CI/CD流水线**
-  - 配置GitHub Actions工作流
-  - 设置代码质量检查
-  - 创建自动化测试流程
+- [x] **设置CI/CD流水线**
+  - [x] 配置GitHub Actions工作流
+  - [x] 设置代码质量检查
+  - [x] 创建自动化测试流程
 
 - [ ] **部署PostgreSQL数据库**
   - 创建用户服务数据库
