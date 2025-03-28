@@ -1,0 +1,106 @@
+/* 应用主样式 */
+.app-logo {
+  height: 32px;
+  margin: 16px;
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+.app-header {
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, 0.08);
+}
+
+.app-content {
+  margin: 24px 16px;
+  padding: 24px;
+  background: #fff;
+  min-height: 280px;
+}
+
+.app-footer {
+  text-align: center;
+  padding: 12px 50px;
+}
+
+/* 登录页样式 */
+.login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #f0f2f5;
+}
+
+.login-form {
+  width: 350px;
+  padding: 36px;
+  box-shadow: 0 0 100px rgba(0, 0, 0, 0.08);
+  background: #fff;
+  border-radius: 4px;
+}
+
+.login-logo {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.login-title {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Dashboard样式 */
+.dashboard-overview-card {
+  margin-bottom: 24px;
+}
+
+.dashboard-recent-activity {
+  margin-top: 24px;
+}
+
+/* 数据表格通用样式 */
+.table-operations {
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-search {
+  width: 300px;
+}
+
+/* 卡片页面容器 */
+.card-container {
+  background: #f0f2f5;
+  padding: 24px;
+  min-height: calc(100vh - 64px - 69px);
+}
+
+/* 响应式布局 */
+@media (max-width: 768px) {
+  .login-form {
+    width: 300px;
+    padding: 20px;
+  }
+  
+  .app-content {
+    margin: 12px 8px;
+    padding: 16px;
+  }
+  
+  .table-search {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+  
+  .table-operations {
+    flex-direction: column;
+  }
+} 

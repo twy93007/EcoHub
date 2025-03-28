@@ -99,4 +99,69 @@ npm start
 
 ## 许可证
 
-本项目采用 [MIT 许可证](LICENSE)。 
+本项目采用 [MIT 许可证](LICENSE)。
+
+## 项目进展
+
+截至目前，我们已经完成了以下工作：
+
+### 基础设施
+- 创建项目代码库 ✓
+- 搭建本地开发环境 ✓
+- 配置Docker开发环境 ✓
+- 设置CI/CD流水线 ✓
+- 部署PostgreSQL数据库 ✓
+- 部署MongoDB数据库 ✓
+- 配置Redis缓存 ✓
+
+### 核心框架
+- 创建API网关 ✓
+  - 实现请求路由功能
+  - 添加身份验证中间件
+  - 设置日志记录
+- 开发用户认证服务 ✓
+  - 实现JWT认证
+  - 创建用户注册API
+  - 创建用户登录API
+  - 实现密码重置功能
+- 开发基础权限系统 ✓
+  - 创建角色模型
+  - 实现权限检查中间件
+
+## 如何启动服务
+
+### 使用Docker Compose
+
+```bash
+# 在项目根目录下运行
+cd /home/ubuntu/EcoHub
+sudo docker-compose up -d --build
+```
+
+### 使用启动脚本
+
+```bash
+# 给脚本添加执行权限
+chmod +x scripts/start_services.sh
+
+# 运行启动脚本
+./scripts/start_services.sh
+```
+
+### 测试API网关
+
+```bash
+# 测试健康检查端点
+curl http://localhost:5000/api/health
+
+# 运行测试脚本
+python3 scripts/test_gateway.py
+```
+
+## 下一步计划
+
+1. 创建前端基础框架
+2. 实现API客户端
+3. 开发用户管理模块
+
+更多详情请查看 [项目进度报告](docs/sprint_report.md) 和 [产品待办事项清单](docs/product_backlog.md)。 
